@@ -20,13 +20,14 @@ public class CoursesGetController {
         Optional<Course> lastCourse = this.search.last();
         if (lastCourse.isPresent()){
             Course course = lastCourse.get();
-            return ResponseEntity.ok(new Response(course.id(), course.name(), course.duration()));
+            Response response = new Response(course.id(), course.name(), course.duration());
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.noContent().build();
     }
 }
 
-final class Response {
+class Response {
     private String id;
     private String name;
     private String duration;
@@ -36,15 +37,27 @@ final class Response {
         this.name = name;
         this.duration = duration;
     }
-    String getId() {
-        return id;
+    public String getId() {
+        return this.id;
     }
 
-    String getName() {
-        return name;
+    public String getName() {
+        return this.name;
     }
 
-    String getDuration() {
-        return duration;
+    public String getDuration() {
+        return this.duration;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }
