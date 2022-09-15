@@ -2,6 +2,7 @@ package tv.codely.mooc.courses.application.create;
 
 import org.junit.jupiter.api.Test;
 import tv.codely.mooc.courses.domain.Course;
+import tv.codely.mooc.courses.domain.CourseNotification;
 import tv.codely.mooc.courses.domain.CourseRepository;
 
 import static org.mockito.Mockito.*;
@@ -10,7 +11,8 @@ final class CourseCreatorShould {
     @Test
     void create_a_valid_course() {
         CourseRepository repository = mock(CourseRepository.class);
-        CourseCreator    creator    = new CourseCreator(repository);
+        CourseNotification notification = mock(CourseNotification.class);
+        CourseCreator    creator    = new CourseCreator(repository, notification);
 
         String id       = "some-id";
         String name     = "name";
@@ -21,5 +23,7 @@ final class CourseCreatorShould {
         creator.create(course.id(), course.name(), course.duration());
 
         verify(repository, atLeastOnce()).save(course);
+        verify(notification, atLeastOnce()).sendNotification(course);
+
     }
 }
