@@ -4,12 +4,11 @@ import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.CourseRepository;
 import tv.codely.shared.domain.Service;
 
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public final class InMemoryCourseRepository implements CourseRepository {
-    private HashMap<String, Course> courses = new HashMap<>();
+    private Map<String, Course> courses = new LinkedHashMap<>();
 
     @Override
     public void save(Course course) {
@@ -18,5 +17,17 @@ public final class InMemoryCourseRepository implements CourseRepository {
 
     public Optional<Course> search(String id) {
         return Optional.ofNullable(courses.get(id));
+    }
+
+    @Override
+    public Optional<Course> searchLast() {
+        List<Map.Entry<String, Course>> entryList =
+            new ArrayList<Map.Entry<String, Course>>(courses.entrySet());
+        if (entryList.size() > 0) {
+            return Optional.of(entryList.get(entryList.size() - 1).getValue());
+        }
+        else {
+            return Optional.empty();
+        }
     }
 }

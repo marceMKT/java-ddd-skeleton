@@ -33,4 +33,23 @@ final class InMemoryCourseRepositoryShould {
 
         assertFalse(repository.search("randomId").isPresent());
     }
+
+    @Test
+    void not_return_last_of_non_existing_course() {
+        InMemoryCourseRepository repository = new InMemoryCourseRepository();
+
+        assertFalse(repository.searchLast().isPresent());
+    }
+
+    @Test
+    void return_last_of_non_existing_course() {
+        InMemoryCourseRepository repository = new InMemoryCourseRepository();
+
+        Course courseFirst = new Course("id1", "name1", "duration1");
+        Course courseLast = new Course("id2", "name2", "duration2");
+        repository.save(courseFirst);
+        repository.save(courseLast);
+
+        assertEquals(Optional.of(courseLast), repository.searchLast());
+    }
 }
