@@ -3,25 +3,25 @@ package tv.codely.mooc.courses.domain;
 import java.util.Objects;
 
 public final class Course {
-    private final String id;
-    private final String name;
-    private final String duration;
+    private final CourseId id;
+    private final CourseName name;
+    private final CourseDuration duration;
 
-    public Course(String id, String name, String duration) {
+    public Course(CourseId id, CourseName name, CourseDuration duration) {
         this.id       = id;
         this.name     = name;
         this.duration = duration;
     }
 
-    public String id() {
+    public CourseId id() {
         return id;
     }
 
-    public String name() {
+    public CourseName name() {
         return name;
     }
 
-    public String duration() {
+    public CourseDuration duration() {
         return duration;
     }
 

@@ -3,8 +3,7 @@ package tv.codely.apps.mooc.controller.courses;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tv.codely.apps.mooc.controller.RequestTestCase;
-import tv.codely.mooc.courses.domain.Course;
-import tv.codely.mooc.courses.domain.CourseRepository;
+import tv.codely.mooc.courses.domain.*;
 import tv.codely.mooc.courses.infrastructure.persistence.InMemoryCourseRepository;
 
 public final class CoursesGetControllerShould extends RequestTestCase {
@@ -23,13 +22,13 @@ public final class CoursesGetControllerShould extends RequestTestCase {
 
     @Test
     void get_a_valid_last_course() throws Exception {
-        Course course = new Course("id1", "name1", "duration1");
+        Course course = new Course(new CourseId("some-id"), new CourseName("name"), new CourseDuration("duration"));
         repository.save(course);
 
         this.assertResponse(
             "/courses/last",
             200,
-            "{\"name\": \"name1\", \"duration\": \"duration1\"}"
+            "{\"name\": \"name\", \"duration\": \"duration\"}"
         );
     }
 }

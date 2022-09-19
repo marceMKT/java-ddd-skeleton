@@ -5,9 +5,9 @@ import java.util.Optional;
 public interface CourseRepository {
     void save(Course course);
 
-    void updateName(String id, String name);
+    void updateName(CourseId id, CourseName name);
 
-    Optional<Course> search(String id);
+    Optional<Course> search(CourseId id);
 
     Optional<Course> searchLast();
 }

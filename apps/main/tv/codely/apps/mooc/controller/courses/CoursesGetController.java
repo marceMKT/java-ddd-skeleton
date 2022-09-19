@@ -2,10 +2,9 @@ package tv.codely.apps.mooc.controller.courses;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.service.CourseFinder;
+import tv.codely.mooc.courses.domain.service.FindCourseResponse;
 
-import java.util.Optional;
 
 @RestController
 public class CoursesGetController {
@@ -17,13 +16,15 @@ public class CoursesGetController {
 
     @GetMapping(value = "/courses/last")
     public ResponseEntity<Response> lastCourse() {
-        Optional<Course> lastCourse = this.finder.last();
-        if (lastCourse.isPresent()){
-            Course course = lastCourse.get();
-            Response response = new Response(course.id(), course.name(), course.duration());
+        try {
+            FindCourseResponse lastCourse = this.finder.last();
+            Response response = new Response(lastCourse.id(), lastCourse.name(), lastCourse.duration());
             return ResponseEntity.ok(response);
         }
-        return ResponseEntity.noContent().build();
+        catch (Exception e){
+            return ResponseEntity.noContent().build();
+        }
+
     }
 }
 

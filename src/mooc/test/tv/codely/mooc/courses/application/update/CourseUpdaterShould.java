@@ -4,8 +4,7 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
-import tv.codely.mooc.courses.domain.Course;
-import tv.codely.mooc.courses.domain.CourseRepository;
+import tv.codely.mooc.courses.domain.*;
 import tv.codely.mooc.courses.domain.service.CourseFinder;
 
 import java.util.Optional;
@@ -23,17 +22,18 @@ final class CourseUpdaterShould {
         CourseRepository repository = mock(CourseRepository.class);
         CourseUpdater updater = new CourseUpdater(repository, finder);
 
-        String id = "some-id";
-        String name = "name";
-        String duration = "duration";
+        CourseId id = new CourseId("some-id");
+        CourseName name = new CourseName("name");
+        CourseDuration duration = new CourseDuration("duration");
+
         Course course = new Course(id, name, duration);
 
         when(finder.findOneById(anyString())).thenReturn(Optional.of(course));
-        doNothing().when(repository).updateName(anyString(), anyString());
+        doNothing().when(repository).updateName(any(), any());
 
         String nameChange = "nameChange";
-        updater.update(course.id(), nameChange);
-        verify(repository, atLeastOnce()).updateName(id, nameChange);
+        updater.update(course.id().value(), nameChange);
+        verify(repository, atLeastOnce()).updateName(id, new CourseName(nameChange));
 
     }
 
