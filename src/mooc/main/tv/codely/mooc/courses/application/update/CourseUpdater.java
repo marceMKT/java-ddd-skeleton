@@ -23,6 +23,5 @@ public class CourseUpdater {
     public void update(String id, String name) throws Exception{
         FindCourseResponse findCourse = finder.findOneById(id);
         repository.updateName(new CourseId(id), new CourseName(name));
-
     }
 }

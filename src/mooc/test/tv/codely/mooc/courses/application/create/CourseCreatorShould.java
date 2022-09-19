@@ -21,7 +21,7 @@ final class CourseCreatorShould {
         creator.create("decf33ca-81a7-419f-a07a-74f214e928e5", "name", "duration");
 
         verify(repository, atLeastOnce()).save(course);
-        verify(notification, atLeastOnce()).sendNotification(course);
+        verify(notification, atLeastOnce()).sendNotification(anyList());
 
     }
 }

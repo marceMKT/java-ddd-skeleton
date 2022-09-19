@@ -15,9 +15,9 @@ public final class CourseCreator {
 
     public void create(String id, String name, String duration) {
 
-        Course course = new Course(new CourseId(id), new CourseName(name), new CourseDuration(duration));
+        Course course = Course.create(new CourseId(id), new CourseName(name), new CourseDuration(duration));
 
         this.repository.save(course);
-        this.notification.sendNotification(course);
+        this.notification.sendNotification(course.pullDomainEvents());
     }
 }
