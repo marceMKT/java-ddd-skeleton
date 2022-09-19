@@ -2,8 +2,8 @@ package tv.codely.apps.mooc.controller.courses;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tv.codely.mooc.courses.application.search.CourseSearch;
 import tv.codely.mooc.courses.domain.Course;
+import tv.codely.mooc.courses.domain.service.CourseSearch;
 
 import java.util.Optional;
 

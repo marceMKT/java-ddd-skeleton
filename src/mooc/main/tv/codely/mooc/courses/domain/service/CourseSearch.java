@@ -1,4 +1,4 @@
-package tv.codely.mooc.courses.application.search;
+package tv.codely.mooc.courses.domain.service;
 
 import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.CourseRepository;
@@ -11,8 +11,12 @@ public class CourseSearch {
 
     private CourseRepository repository;
 
-    public CourseSearch(CourseRepository repository) {
+    public CourseSearch (CourseRepository repository){
         this.repository = repository;
+    }
+
+    public Optional<Course> findOneById(String id){
+        return repository.search(id);
     }
 
     public Optional<Course> last() {

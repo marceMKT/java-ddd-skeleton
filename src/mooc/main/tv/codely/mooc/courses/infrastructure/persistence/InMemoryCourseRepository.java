@@ -15,6 +15,12 @@ public final class InMemoryCourseRepository implements CourseRepository {
         courses.put(course.id(), course);
     }
 
+    @Override
+    public void updateName(String id, String name) {
+        Course course = courses.get(id);
+        courses.put(id, new Course(id, name, course.duration()));
+    }
+
     public Optional<Course> search(String id) {
         return Optional.ofNullable(courses.get(id));
     }

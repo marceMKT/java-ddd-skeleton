@@ -1,12 +1,11 @@
-package tv.codely.mooc.courses.application.search;
+package tv.codely.mooc.courses.domain.service.search;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import tv.codely.mooc.courses.application.create.CourseCreator;
 import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.CourseRepository;
+import tv.codely.mooc.courses.domain.service.CourseSearch;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
