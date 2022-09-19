@@ -14,17 +14,21 @@ public final class CoursesPatchControllerShould extends RequestTestCase {
     @Test
     void update_name_of_existing_course() throws Exception {
 
-        Course course = new Course(new CourseId("some-id"), new CourseName("name"), new CourseDuration("duration"));
+        CourseId id = new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5");
+        Course course = new Course(
+            id,
+            new CourseName("name"),
+            new CourseDuration("duration"));
         repository.save(course);
 
         this.assertRequestWithBody(
             "PATCH",
-            "/courses/some-id",
+            "/courses/" + id.value(),
             "{\"name\": \"nameChange\"}",
             202
         );
 
-        Assert.assertEquals(repository.search(new CourseId("some-id")).get().name().value(), "nameChange");
+        Assert.assertEquals(repository.search(id).get().name().value(), "nameChange");
     }
 
     @Test

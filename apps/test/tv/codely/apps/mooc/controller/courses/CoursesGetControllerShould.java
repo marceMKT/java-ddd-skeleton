@@ -22,7 +22,10 @@ public final class CoursesGetControllerShould extends RequestTestCase {
 
     @Test
     void get_a_valid_last_course() throws Exception {
-        Course course = new Course(new CourseId("some-id"), new CourseName("name"), new CourseDuration("duration"));
+        Course course = new Course(
+            new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5"),
+            new CourseName("name"),
+            new CourseDuration("duration"));
         repository.save(course);
 
         this.assertResponse(

@@ -15,7 +15,7 @@ final class InMemoryCourseRepositoryShould {
     @Test
     void save_a_course() {
         InMemoryCourseRepository repository = new InMemoryCourseRepository();
-        CourseId id = new CourseId("some-id");
+        CourseId id = new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5");
         CourseName name = new CourseName("name");
         CourseDuration duration = new CourseDuration("duration");
 
@@ -27,7 +27,7 @@ final class InMemoryCourseRepositoryShould {
     @Test
     void return_an_existing_course() {
         InMemoryCourseRepository repository = new InMemoryCourseRepository();
-        CourseId id = new CourseId("some-id");
+        CourseId id = new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5");
         CourseName name = new CourseName("name");
         CourseDuration duration = new CourseDuration("duration");
 
@@ -42,7 +42,7 @@ final class InMemoryCourseRepositoryShould {
     void not_return_a_non_existing_course() {
         InMemoryCourseRepository repository = new InMemoryCourseRepository();
 
-        assertFalse(repository.search(new CourseId("randomId")).isPresent());
+        assertFalse(repository.search(new CourseId("decf33ca-81a7-419f-a07a-74f214e92899")).isPresent());
     }
 
     @Test
@@ -56,12 +56,12 @@ final class InMemoryCourseRepositoryShould {
     void return_last_of_non_existing_course() {
         InMemoryCourseRepository repository = new InMemoryCourseRepository();
 
-        CourseId id = new CourseId("some-id1");
+        CourseId id = new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5");
         CourseName name = new CourseName("name1");
         CourseDuration duration = new CourseDuration("duration1");
         Course courseFirst = new Course(id, name, duration);
 
-        Course courseLast = new Course(new CourseId("some-id2"), new CourseName("name2"), new CourseDuration("duration2"));
+        Course courseLast = new Course(new CourseId("decf33ca-81a7-419f-a07a-74f214e92123"), new CourseName("name2"), new CourseDuration("duration2"));
 
         repository.save(courseFirst);
         repository.save(courseLast);

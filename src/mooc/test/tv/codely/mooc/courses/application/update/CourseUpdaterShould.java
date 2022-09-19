@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import tv.codely.mooc.courses.domain.*;
 import tv.codely.mooc.courses.domain.service.CourseFinder;
-
-import java.util.Optional;
+import tv.codely.mooc.courses.domain.service.FindCourseResponse;
 
 import static org.mockito.Mockito.*;
 
@@ -22,17 +21,17 @@ final class CourseUpdaterShould {
         CourseRepository repository = mock(CourseRepository.class);
         CourseUpdater updater = new CourseUpdater(repository, finder);
 
-        CourseId id = new CourseId("some-id");
+        CourseId id = new CourseId("decf33ca-81a7-419f-a07a-74f214e928e5");
         CourseName name = new CourseName("name");
         CourseDuration duration = new CourseDuration("duration");
 
-        Course course = new Course(id, name, duration);
+        FindCourseResponse course = new FindCourseResponse(id, name, duration);
 
-        when(finder.findOneById(anyString())).thenReturn(Optional.of(course));
+        when(finder.findOneById(anyString())).thenReturn(course);
         doNothing().when(repository).updateName(any(), any());
 
         String nameChange = "nameChange";
-        updater.update(course.id().value(), nameChange);
+        updater.update(course.id(), nameChange);
         verify(repository, atLeastOnce()).updateName(id, new CourseName(nameChange));
 
     }
@@ -42,11 +41,11 @@ final class CourseUpdaterShould {
         CourseFinder finder = mock(CourseFinder.class);
         CourseRepository repository = mock(CourseRepository.class);
         CourseUpdater updater = new CourseUpdater(repository, finder);
-        String id = "some-id";
-        when(finder.findOneById(id)).thenReturn(Optional.empty());
+        String id = "decf33ca-81a7-419f-a07a-74f214e928e5";
+        when(finder.findOneById(id)).thenThrow(new Exception("Course not exists"));
 
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
-            updater.update("some-id", "nameChange");
+            updater.update(id, "nameChange");
         });
 
         Assertions.assertEquals("Course not exists", thrown.getMessage());
