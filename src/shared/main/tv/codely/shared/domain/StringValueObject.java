@@ -1,4 +1,4 @@
-package tv.codely.mooc.courses.domain;
+package tv.codely.shared.domain;
 
 import java.util.Objects;
 

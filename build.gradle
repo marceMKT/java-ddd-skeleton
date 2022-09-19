@@ -108,7 +108,7 @@ mainClassName = 'tv.codely.apps.Starter'
 dependencies {
   compile("org.springframework.boot:spring-boot-starter-web")
 
-//  implementation project(":shared")
+  implementation project(":shared")
   implementation project(":backoffice")
   implementation project(":mooc")
 
