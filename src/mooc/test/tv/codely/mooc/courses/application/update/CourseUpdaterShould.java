@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.CourseRepository;
-import tv.codely.mooc.courses.domain.service.CourseSearch;
+import tv.codely.mooc.courses.domain.service.CourseFinder;
 
 import java.util.Optional;
 
@@ -19,16 +19,16 @@ final class CourseUpdaterShould {
 
     @Test
     void update_a_valid_course() throws Exception {
-        CourseSearch search = mock(CourseSearch.class);
+        CourseFinder finder = mock(CourseFinder.class);
         CourseRepository repository = mock(CourseRepository.class);
-        CourseUpdater updater = new CourseUpdater(repository, search);
+        CourseUpdater updater = new CourseUpdater(repository, finder);
 
         String id = "some-id";
         String name = "name";
         String duration = "duration";
         Course course = new Course(id, name, duration);
 
-        when(search.findOneById(anyString())).thenReturn(Optional.of(course));
+        when(finder.findOneById(anyString())).thenReturn(Optional.of(course));
         doNothing().when(repository).updateName(anyString(), anyString());
 
         String nameChange = "nameChange";
@@ -39,11 +39,11 @@ final class CourseUpdaterShould {
 
     @Test
     void update_not_existing_course() throws Exception {
-        CourseSearch search = mock(CourseSearch.class);
+        CourseFinder finder = mock(CourseFinder.class);
         CourseRepository repository = mock(CourseRepository.class);
-        CourseUpdater updater = new CourseUpdater(repository, search);
+        CourseUpdater updater = new CourseUpdater(repository, finder);
         String id = "some-id";
-        when(search.findOneById(id)).thenReturn(Optional.empty());
+        when(finder.findOneById(id)).thenReturn(Optional.empty());
 
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             updater.update("some-id", "nameChange");

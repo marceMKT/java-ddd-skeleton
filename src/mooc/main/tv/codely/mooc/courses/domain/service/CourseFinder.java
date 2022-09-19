@@ -7,11 +7,11 @@ import tv.codely.shared.domain.Service;
 import java.util.Optional;
 
 @Service
-public class CourseSearch {
+public class CourseFinder {
 
     private CourseRepository repository;
 
-    public CourseSearch (CourseRepository repository){
+    public CourseFinder(CourseRepository repository){
         this.repository = repository;
     }
 

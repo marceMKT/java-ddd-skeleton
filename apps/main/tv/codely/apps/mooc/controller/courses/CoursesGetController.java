@@ -3,21 +3,21 @@ package tv.codely.apps.mooc.controller.courses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tv.codely.mooc.courses.domain.Course;
-import tv.codely.mooc.courses.domain.service.CourseSearch;
+import tv.codely.mooc.courses.domain.service.CourseFinder;
 
 import java.util.Optional;
 
 @RestController
 public class CoursesGetController {
-    private final CourseSearch search;
+    private final CourseFinder finder;
 
-    public CoursesGetController(CourseSearch search) {
-        this.search = search;
+    public CoursesGetController(CourseFinder finder) {
+        this.finder = finder;
     }
 
     @GetMapping(value = "/courses/last")
     public ResponseEntity<Response> lastCourse() {
-        Optional<Course> lastCourse = this.search.last();
+        Optional<Course> lastCourse = this.finder.last();
         if (lastCourse.isPresent()){
             Course course = lastCourse.get();
             Response response = new Response(course.id(), course.name(), course.duration());
