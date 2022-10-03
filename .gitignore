@@ -8,3 +8,8 @@ gradle-app.setting
 /var/log/*
 !/var/log/.gitkeep
 .idea
+.settings
+.metadata
+bin
+.classpath
+.project
