@@ -12,7 +12,6 @@ public final class CourseCreatedDomainEvent extends DomainEvent {
 
     public CourseCreatedDomainEvent() {
         super(null);
-
         this.name     = null;
         this.duration = null;
     }
@@ -45,6 +44,9 @@ public final class CourseCreatedDomainEvent extends DomainEvent {
     @Override
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<String, Serializable>() {{
+            put("eventName", eventName());
+            put("eventId", eventId());
+            put("courseId", aggregateId());
             put("name", name);
             put("duration", duration);
         }};
@@ -84,7 +86,7 @@ public final class CourseCreatedDomainEvent extends DomainEvent {
         }
         CourseCreatedDomainEvent that = (CourseCreatedDomainEvent) o;
         return name.equals(that.name) &&
-               duration.equals(that.duration);
+            duration.equals(that.duration);
     }
 
     @Override
