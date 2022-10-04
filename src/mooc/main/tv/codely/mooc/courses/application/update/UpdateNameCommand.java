@@ -1,6 +1,8 @@
 package tv.codely.mooc.courses.application.update;
 
-public class UpdateNameCommand {
+import tv.codely.shared.domain.bus.command.Command;
+
+public class UpdateNameCommand implements Command {
 	
 	private String id;
 	private String newName;
