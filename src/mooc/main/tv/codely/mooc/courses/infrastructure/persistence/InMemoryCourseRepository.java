@@ -1,12 +1,16 @@
 package tv.codely.mooc.courses.infrastructure.persistence;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import tv.codely.mooc.courses.domain.Course;
 import tv.codely.mooc.courses.domain.CourseId;
 import tv.codely.mooc.courses.domain.CourseName;
 import tv.codely.mooc.courses.domain.CourseRepository;
 import tv.codely.shared.domain.Service;
-
-import java.util.*;
 
 @Service
 public final class InMemoryCourseRepository implements CourseRepository {
@@ -38,4 +42,15 @@ public final class InMemoryCourseRepository implements CourseRepository {
             return Optional.empty();
         }
     }
+
+	@Override
+	public List<Course> searchAll() {
+		
+        if (!courses.isEmpty()) {
+            return new ArrayList<Course>(courses.values());
+        }
+        else {
+            return new ArrayList<>();
+        }
+	}
 }

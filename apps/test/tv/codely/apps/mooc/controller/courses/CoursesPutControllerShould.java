@@ -1,9 +1,10 @@
 package tv.codely.apps.mooc.controller.courses;
 
 import org.junit.jupiter.api.Test;
-import tv.codely.apps.mooc.controller.RequestTestCase;
 
-public final class CoursesPutControllerShould extends RequestTestCase {
+import tv.codely.apps.mooc.MoocApplicationTestCase;
+
+public final class CoursesPutControllerShould extends MoocApplicationTestCase {
     @Test
     void create_a_valid_non_existing_course() throws Exception {
         this.assertRequestWithBody(

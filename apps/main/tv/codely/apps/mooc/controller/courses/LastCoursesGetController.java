@@ -1,16 +1,18 @@
 package tv.codely.apps.mooc.controller.courses;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import tv.codely.mooc.courses.domain.service.CourseFinder;
 import tv.codely.mooc.courses.domain.service.FindCourseResponse;
 
 
 @RestController
-public class CoursesGetController {
+public class LastCoursesGetController {
     private final CourseFinder finder;
-
-    public CoursesGetController(CourseFinder finder) {
+    
+    public LastCoursesGetController(CourseFinder finder) {
         this.finder = finder;
     }
 
@@ -26,6 +28,7 @@ public class CoursesGetController {
         }
 
     }
+
 }
 
 class Response {

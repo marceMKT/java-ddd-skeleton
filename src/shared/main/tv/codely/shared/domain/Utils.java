@@ -1,14 +1,15 @@
 package tv.codely.shared.domain;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.CaseFormat;
 
 public final class Utils {
     public static String dateToString(LocalDateTime dateTime) {
@@ -33,5 +34,17 @@ public final class Utils {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public static String toSnake(String text) {
+        return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, text);
+    }
+
+    public static String toCamel(String text) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, text);
+    }
+
+    public static String toCamelFirstLower(String text) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, text);
     }
 }

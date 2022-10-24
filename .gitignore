@@ -13,3 +13,4 @@ gradle-app.setting
 bin
 .classpath
 .project
+src/mooc/main/tv/codely/mooc/courses/application/.DS_Store

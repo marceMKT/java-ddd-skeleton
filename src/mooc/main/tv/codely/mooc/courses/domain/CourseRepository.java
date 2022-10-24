@@ -1,5 +1,6 @@
 package tv.codely.mooc.courses.domain;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CourseRepository {
@@ -10,4 +11,6 @@ public interface CourseRepository {
     Optional<Course> search(CourseId id);
 
     Optional<Course> searchLast();
+    
+    List<Course> searchAll();
 }
